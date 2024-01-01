@@ -18,16 +18,17 @@ use Illuminate\Support\Str;
 */
 
 Route::get('/create-post/{user_id}', function ($user_id) {
-    // $user = User::first();
 
-    $post = Post::create([
+    $user = User::find($user_id);
+
+    $post = $user->posts()->create([
         'title' => Str::random(50),
         'body' => Str::random(200),
-        'user_id' => $user_id,
+        // 'user_id' => $user_id,
     ]);
 
     // event(new PostCreated($post));
-    return 'ok';
+    return $post;
     
 });
 
